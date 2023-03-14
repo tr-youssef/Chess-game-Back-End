@@ -1,5 +1,11 @@
 import readline from "readline-sync";
-import { callAPI, displayChessBoard } from "./functions/functions.js";
+import {
+  displayChessboard,
+  initGame,
+  display,
+  display2,
+  movePiece,
+} from "./functions/functions.js";
 
 const casePossible = [
   "a0",
@@ -69,55 +75,22 @@ const casePossible = [
 ];
 
 do {
+  console.clear();
+  let end = false;
   var statutGame = readline.question(
     "Welcome to our chess game!  \n 1 - New game \n 2 - Resume a game \n 3 - Exit\n The answer : "
   );
   if (statutGame === "1") {
-    let currentPlayer = "";
-    await callAPI("http://localhost:3000/newgame", "GET").then((res) => {
-      displayChessBoard(res.chessBoard);
-      currentPlayer = res.currentPlayer;
-    });
-    do {
-      var autorizedMove = false;
-      var origin = readline.question(
-        "Player " + currentPlayer + ", which piece do you want to move : "
-      );
-      //"This square does not contain your piece"
-      await callAPI(
-        "http://localhost:3000/checkOrigin/?origin=" +
-          origin +
-          "&currentPlayer=" +
-          currentPlayer,
-        "GET"
-      ).then((res) => {
-        autorizedMove = res.res;
-      });
-    } while (
-      !casePossible.includes(origin) ||
-      !casePossible.includes(origin.toLowerCase()) ||
-      !autorizedMove
-    );
-    do {
-      var autorizedMove = false;
-      var destination = readline.question(
-        "Player " + currentPlayer + ", where do you want to put this piece : "
-      );
-      await callAPI(
-        "http://localhost:3000/checkDestination/?destination=" +
-          destination +
-          "&currentPlayer=" +
-          currentPlayer,
-        "GET"
-      ).then((res) => {
-        autorizedMove = res.res;
-      });
-    } while (
-      !casePossible.includes(move) ||
-      !casePossible.includes(move.toLowerCase()) ||
-      !autorizedMove
-    );
+    let { chessboard, currentPlayer } = await initGame();
 
-    // crée une api pour cheque si c'est possible   await callAPI("");
+    displayChessboard(chessboard);
+
+    do {
+      let origin = await display(casePossible, currentPlayer);
+      let destination = await display2(casePossible, currentPlayer, origin);
+      chessboard = await movePiece(origin, destination, currentPlayer);
+      displayChessboard(chessboard);
+    } while (!end);
   }
-} while (statutGame < 1 || statutGame > 3);
+  //console.clear();
+} while (statutGame !== "1" && statutGame !== "2" && statutGame !== "3");

@@ -1,36 +1,46 @@
 import express from "express";
 const app = express();
 const port = 3000;
-import { defaultChessBoard, letterToNumber } from "./data.js";
+import { initChessboard, letterToNumber } from "./data.js";
 
-let chessBoard = defaultChessBoard; //[];
+let chessboard = [];
 let currentPlayer = "";
 
 app.get("/newgame", (req, res) => {
-  chessBoard = defaultChessBoard;
+  chessboard = initChessboard();
   currentPlayer = "White";
-  res.send({ chessBoard: chessBoard, currentPlayer: currentPlayer });
+  res.send({ chessboard: chessboard, currentPlayer: currentPlayer });
 });
-
-app.get("/checkOrigin", (req, res) => {
+app.get("/itsYourPiece", (req, res) => {
   const col = letterToNumber.indexOf(req.query.origin[0].toLowerCase());
   const row = req.query.origin[1];
   const currentPlayer = req.query.currentPlayer;
-  res.send({ res: chessBoard[row][col].color === currentPlayer });
+  res.send({ res: chessboard[row][col].color === currentPlayer });
 });
 
 app.get("/checkDestination", (req, res) => {
-  const col = letterToNumber.indexOf(req.query.origin[0].toLowerCase());
-  const row = req.query.origin[1];
+  const destCol = letterToNumber.indexOf(
+    req.query.destination[0].toLowerCase()
+  );
+  const destRow = req.query.destination[1];
+  // const originCol = letterToNumber.indexOf(req.query.origin[0].toLowerCase());
+  // const originRow = req.query.origin[1];
   const currentPlayer = req.query.currentPlayer;
-  res.send({ res: chessBoard[row][col].color === currentPlayer });
+  const empty = chessboard[destRow][destCol].name === "Square";
+  const differentColor = chessboard[destRow][destCol].color !== currentPlayer;
+  res.send({ res: empty && differentColor });
 });
-
-app.get("/", (req, res) => {
-  res.send({ post: "post" });
-});
-app.get("/test", (req, res) => {
-  res.send({ test1: "test1" });
+app.get("/movePiece", (req, res) => {
+  const destCol = letterToNumber.indexOf(
+    req.query.destination[0].toLowerCase()
+  );
+  const destRow = req.query.destination[1];
+  const originCol = letterToNumber.indexOf(req.query.origin[0].toLowerCase());
+  const originRow = req.query.origin[1];
+  const storage = chessboard[destRow][destCol];
+  chessboard[destRow][destCol] = chessboard[originRow][originCol];
+  chessboard[originRow][originCol] = storage;
+  res.send({ chessboard: chessboard });
 });
 
 app.listen(port, () => {

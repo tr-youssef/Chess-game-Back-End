@@ -1,404 +1,338 @@
-export let defaultChessBoard = [
-  [
-    {
-      letter: "R",
-      name: "Rook",
-      color: "White",
-      symbol: "♖",
-    },
-    {
-      letter: "L",
-      name: "Knight",
-      color: "White",
-      symbol: "♘",
-    },
-    {
-      letter: "B",
-      name: "Bishop",
-      color: "White",
-      symbol: "♗",
-    },
-    {
-      letter: "K",
-      name: "King",
-      color: "White",
-      symbol: "♔",
-    },
-    {
-      letter: "Q",
-      name: "Queen",
-      color: "White",
-      symbol: "♕",
-    },
-    {
-      letter: "B",
-      name: "Bishop",
-      color: "White",
-      symbol: "♗",
-    },
-    {
-      letter: "L",
-      name: "Knight",
-      color: "White",
-      symbol: "♘",
-    },
-    {
-      letter: "R",
-      name: "Rook",
-      color: "White",
-      symbol: "♖",
-    },
-  ],
-  [
-    {
-      letter: "P",
-      name: "Pawn",
-      color: "White",
-      symbol: "♙",
-    },
-    {
-      letter: "P",
-      name: "Pawn",
-      color: "White",
-      symbol: "♙",
-    },
-    {
-      letter: "P",
-      name: "Pawn",
-      color: "White",
-      symbol: "♙",
-    },
-    {
-      letter: "P",
-      name: "Pawn",
-      color: "White",
-      symbol: "♙",
-    },
-    {
-      letter: "P",
-      name: "Pawn",
-      color: "White",
-      symbol: "♙",
-    },
-    {
-      letter: "P",
-      name: "Pawn",
-      color: "White",
-      symbol: "♙",
-    },
-    {
-      letter: "P",
-      name: "Pawn",
-      color: "White",
-      symbol: "♙",
-    },
-    {
-      letter: "P",
-      name: "Pawn",
-      color: "White",
-      symbol: "♙",
-    },
-  ],
-  [
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-  ],
-  [
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-  ],
-  [
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-  ],
-  [
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-    {
-      letter: "*",
-      name: "Square",
-      color: "empty",
-      symbol: "*",
-    },
-  ],
-  [
-    {
-      letter: "P",
-      name: "Pawn",
-      color: "black",
-      symbol: "♟",
-    },
-    {
-      letter: "P",
-      name: "Pawn",
-      color: "black",
-      symbol: "♟",
-    },
-    {
-      letter: "P",
-      name: "Pawn",
-      color: "black",
-      symbol: "♟",
-    },
-    {
-      letter: "P",
-      name: "Pawn",
-      color: "black",
-      symbol: "♟",
-    },
-    {
-      letter: "P",
-      name: "Pawn",
-      color: "black",
-      symbol: "♟",
-    },
-    {
-      letter: "P",
-      name: "Pawn",
-      color: "black",
-      symbol: "♟",
-    },
-    {
-      letter: "P",
-      name: "Pawn",
-      color: "black",
-      symbol: "♟",
-    },
-    {
-      letter: "P",
-      name: "Pawn",
-      color: "black",
-      symbol: "♟",
-    },
-  ],
-  [
-    {
-      letter: "R",
-      name: "Rook",
-      color: "black",
-      symbol: "♜",
-    },
-    {
-      letter: "L",
-      name: "Knight",
-      color: "black",
-      symbol: "♞",
-    },
-    {
-      letter: "B",
-      name: "Bishop",
-      color: "black",
-      symbol: "♝",
-    },
-    {
-      letter: "K",
-      name: "King",
-      color: "black",
-      symbol: "♚",
-    },
-    {
-      letter: "Q",
-      name: "Queen",
-      color: "black",
-      symbol: "♛",
-    },
-    {
-      letter: "B",
-      name: "Bishop",
-      color: "black",
-      symbol: "♝",
-    },
-    {
-      letter: "L",
-      name: "Knight",
-      color: "black",
-      symbol: "♞",
-    },
-    {
-      letter: "R",
-      name: "Rook",
-      color: "black",
-      symbol: "♜",
-    },
-  ],
-];
-
 export const letterToNumber = ["a", "b", "c", "d", "e", "f", "g"];
+
+export function initChessboard() {
+  return [
+    [
+      {
+        name: "Rook",
+        color: "White",
+        symbol: "♖",
+      },
+      {
+        name: "Knight",
+        color: "White",
+        symbol: "♘",
+      },
+      {
+        name: "Bishop",
+        color: "White",
+        symbol: "♗",
+      },
+      {
+        name: "King",
+        color: "White",
+        symbol: "♔",
+      },
+      {
+        name: "Queen",
+        color: "White",
+        symbol: "♕",
+      },
+      {
+        name: "Bishop",
+        color: "White",
+        symbol: "♗",
+      },
+      {
+        name: "Knight",
+        color: "White",
+        symbol: "♘",
+      },
+      {
+        name: "Rook",
+        color: "White",
+        symbol: "♖",
+      },
+    ],
+    [
+      {
+        name: "Pawn",
+        color: "White",
+        symbol: "♙",
+      },
+      {
+        name: "Pawn",
+        color: "White",
+        symbol: "♙",
+      },
+      {
+        name: "Pawn",
+        color: "White",
+        symbol: "♙",
+      },
+      {
+        name: "Pawn",
+        color: "White",
+        symbol: "♙",
+      },
+      {
+        name: "Pawn",
+        color: "White",
+        symbol: "♙",
+      },
+      {
+        name: "Pawn",
+        color: "White",
+        symbol: "♙",
+      },
+      {
+        name: "Pawn",
+        color: "White",
+        symbol: "♙",
+      },
+      {
+        name: "Pawn",
+        color: "White",
+        symbol: "♙",
+      },
+    ],
+    [
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+    ],
+    [
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      { name: "Square", color: "empty", symbol: "*" },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+    ],
+    [
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+    ],
+    [
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+      {
+        name: "Square",
+        color: "empty",
+        symbol: "*",
+      },
+    ],
+    [
+      {
+        name: "Pawn",
+        color: "black",
+        symbol: "♟",
+      },
+      {
+        name: "Pawn",
+        color: "black",
+        symbol: "♟",
+      },
+      {
+        name: "Pawn",
+        color: "black",
+        symbol: "♟",
+      },
+      {
+        name: "Pawn",
+        color: "black",
+        symbol: "♟",
+      },
+      {
+        name: "Pawn",
+        color: "black",
+        symbol: "♟",
+      },
+      {
+        name: "Pawn",
+        color: "black",
+        symbol: "♟",
+      },
+      {
+        name: "Pawn",
+        color: "black",
+        symbol: "♟",
+      },
+      {
+        name: "Pawn",
+        color: "black",
+        symbol: "♟",
+      },
+    ],
+    [
+      {
+        name: "Rook",
+        color: "black",
+        symbol: "♜",
+      },
+      {
+        name: "Knight",
+        color: "black",
+        symbol: "♞",
+      },
+      {
+        name: "Bishop",
+        color: "black",
+        symbol: "♝",
+      },
+      {
+        name: "King",
+        color: "black",
+        symbol: "♚",
+      },
+      {
+        name: "Queen",
+        color: "black",
+        symbol: "♛",
+      },
+      {
+        name: "Bishop",
+        color: "black",
+        symbol: "♝",
+      },
+      {
+        name: "Knight",
+        color: "black",
+        symbol: "♞",
+      },
+      {
+        name: "Rook",
+        color: "black",
+        symbol: "♜",
+      },
+    ],
+  ];
+}
