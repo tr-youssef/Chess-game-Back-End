@@ -44,11 +44,7 @@ export async function display(casePossible, currentPlayer) {
       "Player " + currentPlayer + ", which piece do you want to move : "
     );
     autorizedMove = await itsYourPiece(origin, currentPlayer, casePossible);
-  } while (
-    !casePossible.includes(origin) ||
-    !casePossible.includes(origin.toLowerCase()) ||
-    !autorizedMove
-  );
+  } while (!casePossible.includes(origin.toLowerCase()) || !autorizedMove);
   return origin;
 }
 export async function itsYourPiece(square, currentPlayer, casePossible) {
@@ -59,10 +55,7 @@ export async function itsYourPiece(square, currentPlayer, casePossible) {
     "&currentPlayer=" +
     currentPlayer;
 
-  if (
-    casePossible.includes(square) ||
-    casePossible.includes(square.toLowerCase())
-  )
+  if (casePossible.includes(square.toLowerCase()))
     autorizedMove = await callAPI(url, "GET").then((res) => {
       return res.res;
     });
@@ -81,11 +74,7 @@ export async function display2(casePossible, currentPlayer, origin) {
       casePossible,
       origin
     );
-  } while (
-    !casePossible.includes(destination) ||
-    !casePossible.includes(destination.toLowerCase()) ||
-    !autorizedMove
-  );
+  } while (!casePossible.includes(destination.toLowerCase()) || !autorizedMove);
   return destination;
 }
 export async function hasTheRightToMove(
@@ -103,10 +92,7 @@ export async function hasTheRightToMove(
     origin +
     "&currentPlayer=" +
     currentPlayer;
-  if (
-    casePossible.includes(square) ||
-    casePossible.includes(square.toLowerCase())
-  )
+  if (casePossible.includes(square.toLowerCase()))
     await callAPI(url, "GET").then((res) => {
       autorizedMove = res;
     });
