@@ -126,3 +126,10 @@ export async function movePiece(origin, destination, currentPlayer) {
   });
   return chessboard;
 }
+export async function changePlayer() {
+  let url = "http://localhost:3000/changePlayer";
+  let currentPlayer = await callAPI(url, "GET").then((res) => {
+    return res.currentPlayer;
+  });
+  return currentPlayer;
+}

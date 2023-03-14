@@ -17,7 +17,6 @@ app.get("/itsYourPiece", (req, res) => {
   const currentPlayer = req.query.currentPlayer;
   res.send({ res: chessboard[row][col].color === currentPlayer });
 });
-
 app.get("/checkDestination", (req, res) => {
   const destCol = letterToNumber.indexOf(
     req.query.destination[0].toLowerCase()
@@ -42,7 +41,12 @@ app.get("/movePiece", (req, res) => {
   chessboard[originRow][originCol] = storage;
   res.send({ chessboard: chessboard });
 });
-
+app.get("/changePlayer", (req, res) => {
+  currentPlayer === "White"
+    ? (currentPlayer = "Black")
+    : (currentPlayer = "White");
+  res.send({ currentPlayer: currentPlayer });
+});
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

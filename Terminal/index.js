@@ -5,6 +5,7 @@ import {
   display,
   display2,
   movePiece,
+  changePlayer,
 } from "./functions/functions.js";
 
 const casePossible = [
@@ -90,7 +91,8 @@ do {
       let destination = await display2(casePossible, currentPlayer, origin);
       chessboard = await movePiece(origin, destination, currentPlayer);
       displayChessboard(chessboard);
+      currentPlayer = await changePlayer(currentPlayer);
     } while (!end);
   }
-  //console.clear();
+  console.clear();
 } while (statutGame !== "1" && statutGame !== "2" && statutGame !== "3");
