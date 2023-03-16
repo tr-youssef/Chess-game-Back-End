@@ -1,4 +1,4 @@
-export const letterToNumber = ["a", "b", "c", "d", "e", "f", "g"];
+export const letterToNumber = ["a", "b", "c", "d", "e", "f", "g", "h"];
 
 export function initChessboard() {
   return [

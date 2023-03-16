@@ -1,12 +1,5 @@
 import readline from "readline-sync";
-import {
-  displayChessboard,
-  initGame,
-  display,
-  display2,
-  movePiece,
-  changePlayer,
-} from "./functions/functions.js";
+import { displayChessboard, initGame, display, display2, movePiece, changeCurrentPlayer } from "./functions/functions.js";
 
 const casePossible = [
   "a0",
@@ -78,21 +71,16 @@ const casePossible = [
 do {
   console.clear();
   let end = false;
-  var statutGame = readline.question(
-    "Welcome to our chess game!  \n 1 - New game \n 2 - Resume a game \n 3 - Exit\n The answer : "
-  );
+  var statutGame = readline.question("Welcome to our chess game!  \n 1 - New game \n 2 - Resume a game \n 3 - Exit\n The answer : ");
   if (statutGame === "1") {
     let { chessboard, currentPlayer } = await initGame();
-
     displayChessboard(chessboard);
-
     do {
       let origin = await display(casePossible, currentPlayer);
       let destination = await display2(casePossible, currentPlayer, origin);
       chessboard = await movePiece(origin, destination, currentPlayer);
       displayChessboard(chessboard);
-      currentPlayer = await changePlayer(currentPlayer);
+      currentPlayer = await changeCurrentPlayer(currentPlayer);
     } while (!end);
   }
-  console.clear();
 } while (statutGame !== "1" && statutGame !== "2" && statutGame !== "3");
