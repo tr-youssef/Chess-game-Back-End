@@ -2,7 +2,7 @@ import express from "express";
 const app = express();
 const port = 3000;
 import { initChessboard, letterToNumber } from "./data.js";
-import { movePawn, moveRook } from "./functions/functions.js";
+import { chessPieceMove, somethingBlocks } from "./functions/functions.js";
 
 let chessboard = [];
 let currentPlayer = "";
@@ -24,19 +24,9 @@ app.get("/checkDestination", (req, res) => {
   const originCol = letterToNumber.indexOf(req.query.origin[0].toLowerCase());
   const originRow = req.query.origin[1];
   const currentPlayer = req.query.currentPlayer;
-  const empty = chessboard[destRow][destCol].name === "Square";
   const differentColor = chessboard[destRow][destCol].color !== currentPlayer;
-  let rightMove = false;
-
-  switch (chessboard[originRow][originCol].name) {
-    case "Pawn":
-      rightMove = movePawn(destCol, destRow, originCol, originRow, currentPlayer);
-      break;
-    case "Rook":
-      rightMove = moveRook(destCol, destRow, originCol, originRow);
-      break;
-  }
-  res.send({ res: empty && differentColor && rightMove });
+  const thisChessPieceMove = chessPieceMove(chessboard, destCol, destRow, originCol, originRow, currentPlayer);
+  res.send({ res: differentColor && thisChessPieceMove });
 });
 app.get("/movePiece", (req, res) => {
   const destCol = letterToNumber.indexOf(req.query.destination[0].toLowerCase());

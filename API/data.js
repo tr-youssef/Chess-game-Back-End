@@ -19,14 +19,14 @@ export function initChessboard() {
         symbol: "♗",
       },
       {
-        name: "King",
-        color: "White",
-        symbol: "♔",
-      },
-      {
         name: "Queen",
         color: "White",
         symbol: "♕",
+      },
+      {
+        name: "King",
+        color: "White",
+        symbol: "♔",
       },
       {
         name: "Bishop",
@@ -309,14 +309,14 @@ export function initChessboard() {
         symbol: "♝",
       },
       {
-        name: "King",
-        color: "Black",
-        symbol: "♚",
-      },
-      {
         name: "Queen",
         color: "Black",
         symbol: "♛",
+      },
+      {
+        name: "King",
+        color: "Black",
+        symbol: "♚",
       },
       {
         name: "Bishop",
