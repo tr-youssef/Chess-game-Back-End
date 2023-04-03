@@ -24,16 +24,28 @@ app.get("/checkDestination", (req, res) => {
   const originCol = letterToNumber.indexOf(req.query.origin[0].toLowerCase());
   const originRow = req.query.origin[1];
   const currentPlayer = req.query.currentPlayer;
-  const differentColor = chessboard[destRow][destCol].color !== currentPlayer;
-  const thisChessPieceMove = chessPieceMove(chessboard, destCol, destRow, originCol, originRow, currentPlayer);
-  res.send({ res: differentColor && thisChessPieceMove });
+  let differentColor = false;
+  let thisChessPieceMove = false;
+  let thisChessPieceBlock = false;
+  differentColor = chessboard[destRow][destCol].color !== currentPlayer;
+  if (differentColor) {
+    thisChessPieceMove = chessPieceMove(chessboard, Number(destCol), Number(destRow), Number(originCol), Number(originRow), currentPlayer);
+    if (thisChessPieceMove) thisChessPieceBlock = somethingBlocks(Number(destCol), Number(destRow), Number(originCol), Number(originRow), chessboard, currentPlayer);
+  }
+  res.send({ res: differentColor && thisChessPieceMove && thisChessPieceBlock });
 });
 app.get("/movePiece", (req, res) => {
   const destCol = letterToNumber.indexOf(req.query.destination[0].toLowerCase());
   const destRow = req.query.destination[1];
   const originCol = letterToNumber.indexOf(req.query.origin[0].toLowerCase());
   const originRow = req.query.origin[1];
-  const storage = chessboard[destRow][destCol];
+  let storage = chessboard[destRow][destCol];
+  if (chessboard[destRow][destCol].color !== chessboard[originRow][originCol].color && chessboard[destRow][destCol].color !== "empty")
+    storage = {
+      name: "Square",
+      color: "empty",
+      symbol: "*",
+    };
   chessboard[destRow][destCol] = chessboard[originRow][originCol];
   chessboard[originRow][originCol] = storage;
   res.send({ chessboard: chessboard });
