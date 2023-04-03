@@ -46,8 +46,8 @@ export function moveBishop(destCol, destRow, originCol, originRow) {
 }
 export function somethingBlocksBishop(destCol, destRow, originCol, originRow, chessboard) {
   let autorizedMove = true;
-  let j = Number(originCol) <= Number(destCol) ? Number(originCol) + 1 : Number(originCol) - 1;
-  for (let i = Number(originRow) <= Number(destRow) ? Number(originRow) + 1 : Number(originRow) - 1; Number(originRow) <= Number(destRow) ? i <= Number(destRow) : i >= Number(destRow); Number(originRow) <= Number(destRow) ? i++ : i--) {
+  let j = originCol <= destCol ? originCol + 1 : originCol - 1;
+  for (let i = originRow <= destRow ? originRow + 1 : originRow - 1; originRow <= destRow ? i <= destRow - 1 : i >= destRow + 1; originRow <= destRow ? i++ : i--) {
     if (chessboard[i][j].color !== "empty") autorizedMove = false;
     Number(originCol) <= Number(destCol) ? j++ : j--;
   }
