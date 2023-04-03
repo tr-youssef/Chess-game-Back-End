@@ -49,19 +49,19 @@ export function somethingBlocksBishop(destCol, destRow, originCol, originRow, ch
   let j = originCol <= destCol ? originCol + 1 : originCol - 1;
   for (let i = originRow <= destRow ? originRow + 1 : originRow - 1; originRow <= destRow ? i <= destRow - 1 : i >= destRow + 1; originRow <= destRow ? i++ : i--) {
     if (chessboard[i][j].color !== "empty") autorizedMove = false;
-    Number(originCol) <= Number(destCol) ? j++ : j--;
+    originCol <= destCol ? j++ : j--;
   }
   return autorizedMove;
 }
 export function moveKnight(destCol, destRow, originCol, originRow) {
-  if (Number(destCol) - Number(originCol) === 2 && Number(destRow) - Number(originRow) === 1) return true;
-  if (Number(destCol) - Number(originCol) === 2 && Number(destRow) - Number(originRow) === -1) return true;
-  if (Number(destCol) - Number(originCol) === 1 && Number(destRow) - Number(originRow) === 2) return true;
-  if (Number(destCol) - Number(originCol) === 1 && Number(destRow) - Number(originRow) === -2) return true;
-  if (Number(destCol) - Number(originCol) === -2 && Number(destRow) - Number(originRow) === 1) return true;
-  if (Number(destCol) - Number(originCol) === -2 && Number(destRow) - Number(originRow) === -1) return true;
-  if (Number(destCol) - Number(originCol) === -1 && Number(destRow) - Number(originRow) === 2) return true;
-  if (Number(destCol) - Number(originCol) === -1 && Number(destRow) - Number(originRow) === -2) return true;
+  if (destCol - originCol === 2 && destRow - originRow === 1) return true;
+  if (destCol - originCol === 2 && destRow - originRow === -1) return true;
+  if (destCol - originCol === 1 && destRow - originRow === 2) return true;
+  if (destCol - originCol === 1 && destRow - originRow === -2) return true;
+  if (destCol - originCol === -2 && destRow - originRow === 1) return true;
+  if (destCol - originCol === -2 && destRow - originRow === -1) return true;
+  if (destCol - originCol === -1 && destRow - originRow === 2) return true;
+  if (destCol - originCol === -1 && destRow - originRow === -2) return true;
   return false;
 }
 export function somethingBlocksKnight() {
@@ -76,23 +76,21 @@ export function moveQueen(destCol, destRow, originCol, originRow) {
 export function somethingBlocksQueen(destCol, destRow, originCol, originRow, chessboard) {
   let autorizedMove = true;
   if (destCol === originCol || destRow === originRow) {
-    console.log("rook");
     autorizedMove = somethingBlocksRook(destCol, destRow, originCol, originRow, chessboard);
   } else {
     autorizedMove = somethingBlocksBishop(destCol, destRow, originCol, originRow, chessboard);
-    console.log("bishop");
   }
   return autorizedMove;
 }
 export function moveKing(destCol, destRow, originCol, originRow) {
-  if (Number(destCol) - Number(originCol) === 1 && Number(destRow) - Number(originRow) === 1) return true;
-  if (Number(destCol) - Number(originCol) === 1 && Number(destRow) - Number(originRow) === -1) return true;
-  if (Number(destCol) - Number(originCol) === 1 && Number(destRow) - Number(originRow) === 0) return true;
-  if (Number(destCol) - Number(originCol) === 0 && Number(destRow) - Number(originRow) === 1) return true;
-  if (Number(destCol) - Number(originCol) === 0 && Number(destRow) - Number(originRow) === -1) return true;
-  if (Number(destCol) - Number(originCol) === -1 && Number(destRow) - Number(originRow) === -1) return true;
-  if (Number(destCol) - Number(originCol) === -1 && Number(destRow) - Number(originRow) === 0) return true;
-  if (Number(destCol) - Number(originCol) === -1 && Number(destRow) - Number(originRow) === 1) return true;
+  if (destCol - originCol === 1 && destRow - originRow === 1) return true;
+  if (destCol - originCol === 1 && destRow - originRow === -1) return true;
+  if (destCol - originCol === 1 && destRow - originRow === 0) return true;
+  if (destCol - originCol === 0 && destRow - originRow === 1) return true;
+  if (destCol - originCol === 0 && destRow - originRow === -1) return true;
+  if (destCol - originCol === -1 && destRow - originRow === -1) return true;
+  if (destCol - originCol === -1 && destRow - originRow === 0) return true;
+  if (destCol - originCol === -1 && destRow - originRow === 1) return true;
   return false;
 }
 export function somethingBlocksKing() {
