@@ -17,8 +17,8 @@ export function movePawn(destCol, destRow, originCol, originRow, currentPlayer, 
 export function somethingBlocksPawn(destCol, destRow, originCol, originRow, chessboard, currentPlayer) {
   let autorizedMove = true;
   if (originCol === destCol) {
-    for (let i = currentPlayer === "White" ? Number(originRow) + 1 : Number(originRow) - 1; currentPlayer === "White" ? i <= Number(destRow) : i >= Number(destRow); currentPlayer === "White" ? i++ : i--) {
-      if (chessboard[i][Number(originCol)].color !== "empty") autorizedMove = false;
+    for (let i = currentPlayer === "White" ? originRow + 1 : originRow - 1; currentPlayer === "White" ? i <= destRow : i >= destRow; currentPlayer === "White" ? i++ : i--) {
+      if (chessboard[i][originCol].color !== "empty") autorizedMove = false;
     }
   }
   return autorizedMove;
@@ -30,12 +30,12 @@ export function moveRook(destCol, destRow, originCol, originRow) {
 export function somethingBlocksRook(destCol, destRow, originCol, originRow, chessboard) {
   let autorizedMove = true;
   if (originCol === destCol) {
-    for (let i = Number(originRow) <= Number(destRow) ? Number(originRow) + 1 : Number(originRow) - 1; Number(originRow) <= Number(destRow) ? i <= Number(destRow) : i >= Number(destRow); Number(originRow) <= Number(destRow) ? i++ : i--) {
-      if (chessboard[i][Number(originCol)].color !== "empty") autorizedMove = false;
+    for (let i = originRow <= destRow ? originRow + 1 : originRow - 1; originRow <= destRow ? i <= destRow - 1 : i >= destRow + 1; originRow <= destRow ? i++ : i--) {
+      if (chessboard[i][originCol].color !== "empty") autorizedMove = false;
     }
   } else if (originRow === destRow) {
-    for (let i = Number(originCol) <= Number(destCol) ? Number(originCol) + 1 : Number(originCol) - 1; Number(originCol) <= Number(destCol) ? i <= Number(destCol) : i >= Number(destCol); Number(originCol) <= Number(destCol) ? i++ : i--) {
-      if (chessboard[Number(originRow)][i].color !== "empty") autorizedMove = false;
+    for (let i = originCol <= destCol ? originCol + 1 : originCol - 1; originCol <= destCol ? i <= destCol - 1 : i >= destCol + 1; originCol <= destCol ? i++ : i--) {
+      if (chessboard[originRow][i].color !== "empty") autorizedMove = false;
     }
   }
 
