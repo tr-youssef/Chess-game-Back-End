@@ -1,5 +1,5 @@
 import readline from "readline-sync";
-import { displayChessboard, initGame, display, display2, movePiece, changeCurrentPlayer } from "./functions/functions.js";
+import { initGame, display, movePiece, changeCurrentPlayer, saveGame, getGames, displayGames, getGame } from "./functions/functions.js";
 
 const casePossible = [
   "a0",
@@ -71,16 +71,33 @@ const casePossible = [
 do {
   console.clear();
   let end = false;
+  let chessboard = [];
+  let currentPlayer = "";
   var statutGame = readline.question("Welcome to our chess game!  \n 1 - New game \n 2 - Resume a game \n 3 - Exit\n The answer : ");
-  if (statutGame === "1") {
-    let { chessboard, currentPlayer } = await initGame();
-    displayChessboard(chessboard);
-    do {
-      let origin = await display(casePossible, currentPlayer);
-      let destination = await display2(casePossible, currentPlayer, origin);
-      chessboard = await movePiece(origin, destination, currentPlayer);
-      displayChessboard(chessboard);
-      currentPlayer = await changeCurrentPlayer(currentPlayer);
-    } while (!end);
+  if (statutGame === "3") {
+    break;
+  } else if (statutGame === "1") {
+    let initgame = await initGame();
+    chessboard = initgame.chessboard;
+    currentPlayer = initgame.currentPlayer;
+  } else if (statutGame === "2") {
+    let games = await getGames();
+    let ID = await displayGames(games);
+    let game = await getGame(ID);
+    chessboard = game.chessboard;
+    currentPlayer = game.currentPlayer;
   }
+  do {
+    let { origin, destination } = await display(casePossible, currentPlayer, chessboard);
+    if (origin === "exit" || destination === "exit") break;
+    else if (origin.toLowerCase() === "save" || destination.toLowerCase() === "save") {
+      let games = await getGames();
+      let ID = await displayGames(games);
+      let savedGame = await saveGame(chessboard, currentPlayer, ID);
+    } else {
+      chessboard = await movePiece(origin, destination, currentPlayer);
+      currentPlayer = await changeCurrentPlayer(currentPlayer);
+    }
+  } while (!end);
+  console.clear();
 } while (statutGame !== "1" && statutGame !== "2" && statutGame !== "3");

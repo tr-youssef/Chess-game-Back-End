@@ -44,7 +44,7 @@ export function initChessboard() {
         symbol: "♖",
       },
     ],
-    /*[
+    [
       {
         name: "Pawn",
         color: "White",
@@ -84,47 +84,6 @@ export function initChessboard() {
         name: "Pawn",
         color: "White",
         symbol: "♙",
-      },
-    ],*/ [
-      {
-        name: "Square",
-        color: "empty",
-        symbol: "*",
-      },
-      {
-        name: "Square",
-        color: "empty",
-        symbol: "*",
-      },
-      {
-        name: "Square",
-        color: "empty",
-        symbol: "*",
-      },
-      {
-        name: "Square",
-        color: "empty",
-        symbol: "*",
-      },
-      {
-        name: "Square",
-        color: "empty",
-        symbol: "*",
-      },
-      {
-        name: "Square",
-        color: "empty",
-        symbol: "*",
-      },
-      {
-        name: "Square",
-        color: "empty",
-        symbol: "*",
-      },
-      {
-        name: "Square",
-        color: "empty",
-        symbol: "*",
       },
     ],
     [
@@ -293,88 +252,46 @@ export function initChessboard() {
     ],
     [
       {
-        name: "Square",
-        color: "empty",
-        symbol: "*",
+        name: "Pawn",
+        color: "Black",
+        symbol: "♟",
       },
       {
-        name: "Square",
-        color: "empty",
-        symbol: "*",
+        name: "Pawn",
+        color: "Black",
+        symbol: "♟",
       },
       {
-        name: "Square",
-        color: "empty",
-        symbol: "*",
+        name: "Pawn",
+        color: "Black",
+        symbol: "♟",
       },
       {
-        name: "Square",
-        color: "empty",
-        symbol: "*",
+        name: "Pawn",
+        color: "Black",
+        symbol: "♟",
       },
       {
-        name: "Square",
-        color: "empty",
-        symbol: "*",
+        name: "Pawn",
+        color: "Black",
+        symbol: "♟",
       },
       {
-        name: "Square",
-        color: "empty",
-        symbol: "*",
+        name: "Pawn",
+        color: "Black",
+        symbol: "♟",
       },
       {
-        name: "Square",
-        color: "empty",
-        symbol: "*",
+        name: "Pawn",
+        color: "Black",
+        symbol: "♟",
       },
       {
-        name: "Square",
-        color: "empty",
-        symbol: "*",
+        name: "Pawn",
+        color: "Black",
+        symbol: "♟",
       },
     ],
-    /* [
-      {
-        name: "Pawn",
-        color: "Black",
-        symbol: "♟",
-      },
-      {
-        name: "Pawn",
-        color: "Black",
-        symbol: "♟",
-      },
-      {
-        name: "Pawn",
-        color: "Black",
-        symbol: "♟",
-      },
-      {
-        name: "Pawn",
-        color: "Black",
-        symbol: "♟",
-      },
-      {
-        name: "Pawn",
-        color: "Black",
-        symbol: "♟",
-      },
-      {
-        name: "Pawn",
-        color: "Black",
-        symbol: "♟",
-      },
-      {
-        name: "Pawn",
-        color: "Black",
-        symbol: "♟",
-      },
-      {
-        name: "Pawn",
-        color: "Black",
-        symbol: "♟",
-      },
-    ],*/
     [
       {
         name: "Rook",

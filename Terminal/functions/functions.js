@@ -1,25 +1,27 @@
 import readline from "readline-sync";
+import moment from "moment";
 import fetch from "node-fetch";
 
-export async function callAPI(url = "", methode, data = {}) {
+export async function callAPI(url = "", method, data = {}) {
   const options = {
-    method: methode,
+    method: method,
     headers: {
       "Content-Type": "application/json",
     },
   };
-  if (methode !== "GET") options.body = { body: JSON.stringify(data) };
+  if (method !== "GET") options.body = JSON.stringify(data);
   const response = await fetch(url, options);
   return response.json();
 }
 export async function initGame() {
-  let { chessboard, currentPlayer } = await callAPI("http://localhost:3000/newgame", "GET").then((res) => {
+  let { chessboard, currentPlayer, ID } = await callAPI("http://localhost:3000/newgame", "GET").then((res) => {
     return {
       chessboard: res.chessboard,
       currentPlayer: res.currentPlayer,
+      ID: Date.now(),
     };
   });
-  return { chessboard, currentPlayer };
+  return { chessboard, currentPlayer, ID };
 }
 export function displayChessboard(chessboard) {
   console.clear();
@@ -33,14 +35,22 @@ export function displayChessboard(chessboard) {
   }
   console.log("  a b c d e f g h");
 }
-export async function display(casePossible, currentPlayer) {
+export async function display(casePossible, currentPlayer, chessboard) {
   var origin = "";
-  let autorizedMove = false;
+  var destination = "";
+  let autorizedMoveOrigin = false;
+  let autorizedMoveDestination = false;
   do {
+    displayChessboard(chessboard);
     origin = readline.question("Player " + currentPlayer + ", which piece do you want to move : ");
-    autorizedMove = await itsYourPiece(origin, currentPlayer, casePossible);
-  } while (!casePossible.includes(origin.toLowerCase()) || !autorizedMove);
-  return origin;
+    autorizedMoveOrigin = await itsYourPiece(origin, currentPlayer, casePossible);
+    if (autorizedMoveOrigin) {
+      destination = readline.question("Player " + currentPlayer + ", where do you want to put this piece : ");
+      autorizedMoveDestination = await hasTheRightToMove(destination, currentPlayer, casePossible, origin);
+    }
+    if (origin.toLowerCase() === "exit" || destination.toLowerCase() === "exit" || origin.toLowerCase() === "save" || destination.toLowerCase() === "save") break;
+  } while (!casePossible.includes(origin.toLowerCase()) || !autorizedMoveOrigin || !casePossible.includes(destination.toLowerCase()) || !autorizedMoveDestination);
+  return { origin: origin, destination: destination };
 }
 export async function itsYourPiece(square, currentPlayer, casePossible) {
   var autorizedMove = false;
@@ -52,22 +62,13 @@ export async function itsYourPiece(square, currentPlayer, casePossible) {
     });
   return autorizedMove;
 }
-export async function display2(casePossible, currentPlayer, origin) {
-  var destination = "";
-  let autorizedMove = false;
-  do {
-    destination = readline.question("Player " + currentPlayer + ", where do you want to put this piece : ");
-    autorizedMove = await hasTheRightToMove(destination, currentPlayer, casePossible, origin);
-  } while (!casePossible.includes(destination.toLowerCase()) || !autorizedMove.res);
-  return destination;
-}
 export async function hasTheRightToMove(square, currentPlayer, casePossible, origin) {
   var autorizedMove = false;
 
   let url = "http://localhost:3000/checkDestination/?destination=" + square + "&origin=" + origin + "&currentPlayer=" + currentPlayer;
   if (casePossible.includes(square.toLowerCase()))
     await callAPI(url, "GET").then((res) => {
-      autorizedMove = res;
+      autorizedMove = res.res;
     });
   return autorizedMove;
 }
@@ -85,4 +86,42 @@ export async function changeCurrentPlayer() {
     return res.currentPlayer;
   });
   return currentPlayer;
+}
+export async function saveGame(chessboard, currentPlayer, ID) {
+  let gameSaved = {};
+  let url = "http://localhost:3000/save";
+  await callAPI(url, "POST", { chessboard, currentPlayer, ID }).then((res) => {
+    gameSaved = res;
+  });
+  return gameSaved;
+}
+export async function getGames() {
+  let games = {};
+  let url = "http://localhost:3000/games";
+  await callAPI(url, "GET").then((res) => {
+    games = res;
+  });
+  return games;
+}
+export async function getGame(ID) {
+  let game = {};
+  let url = "http://localhost:3000/game/?id=" + ID;
+  await callAPI(url, "GET").then((res) => {
+    game = res;
+  });
+  return game;
+}
+export async function displayGames(games) {
+  let choice = 0;
+  do {
+    console.clear();
+    for (let i = 1; i < 6; i++) {
+      let game = games.find((game) => game.ID === i.toString());
+      if (game) console.log(game.ID + " - " + moment(game.date).format("YYYY-MM-DD HH:MM:SS"));
+      else console.log(i + " - empty");
+    }
+
+    choice = readline.question(`Select Game Slot : `);
+  } while (!["1", "2", "3", "4", "5"].includes(choice));
+  return choice;
 }
